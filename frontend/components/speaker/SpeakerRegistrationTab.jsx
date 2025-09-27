@@ -11,7 +11,7 @@ import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { useToast } from "@/components/ui/use-toast"
-import { registeredSpeakers } from "@/lib/registered-speakers"
+import { getAllSpeakers, addSpeaker, updateSpeaker, findSpeakerByEmail, isSpeakerRegistered } from "@/lib/registered-speakers"
 
 const registrationSchema = z.object({
   fullName: z.string().min(1, "Full name is required"),
@@ -56,12 +56,17 @@ export default function SpeakerRegistrationTab({ onRegistrationUpdate }) {
     },
   })
 
+  // Get current user email (in real app this would come from session)
+  const getCurrentUserEmail = () => {
+    // For demo purposes, we'll use localStorage to simulate session
+    // In a real app, this would come from NextAuth session
+    return localStorage.getItem('currentUserEmail') || 'speaker@example.com'
+  }
+
   // Check if user is already registered on component mount
   useEffect(() => {
-    // For now, we'll check if there's any registration (in a real app, you'd check by user ID)
-    // This is a simplified check - you might want to store the current user's email in session
-    const mockUserEmail = "speaker@example.com" // This would come from session in real app
-    const existingRegistration = registeredSpeakers.find(speaker => speaker.email === mockUserEmail)
+    const currentUserEmail = getCurrentUserEmail()
+    const existingRegistration = findSpeakerByEmail(currentUserEmail)
     
     if (existingRegistration) {
       setIsRegistered(true)
@@ -76,10 +81,10 @@ export default function SpeakerRegistrationTab({ onRegistrationUpdate }) {
 
   const onSubmit = async (data) => {
     try {
-      // Check if email already exists
-      const emailExists = registeredSpeakers.some(speaker => speaker.email === data.email)
+      const currentUserEmail = getCurrentUserEmail()
       
-      if (emailExists && !isEditing) {
+      // For new registration, check if email already exists
+      if (!isEditing && isSpeakerRegistered(data.email)) {
         toast({
           title: "Registration Failed",
           description: "A speaker with this email is already registered.",
@@ -88,37 +93,36 @@ export default function SpeakerRegistrationTab({ onRegistrationUpdate }) {
         return
       }
 
-      // Create speaker object
-      const speakerData = {
-        ...data,
-        registrationDate: new Date().toISOString(),
-      }
-
+      let result
       if (isEditing) {
         // Update existing registration
-        const index = registeredSpeakers.findIndex(speaker => speaker.email === data.email)
-        if (index !== -1) {
-          registeredSpeakers[index] = speakerData
-        }
+        result = updateSpeaker(currentUserEmail, data)
       } else {
         // Add new registration
-        registeredSpeakers.push(speakerData)
+        result = addSpeaker(data)
+        // Store email in localStorage to simulate session
+        localStorage.setItem('currentUserEmail', data.email)
       }
 
-      setIsRegistered(true)
-      setIsEditing(false)
+      if (result) {
+        setIsRegistered(true)
+        setIsEditing(false)
 
-      toast({
-        title: "Registration Successful",
-        description: isEditing ? "Registration updated successfully!" : "You have been registered successfully!",
-      })
+        toast({
+          title: "Registration Successful",
+          description: isEditing ? "Registration updated successfully!" : "You have been registered successfully!",
+        })
 
-      // Notify parent component about registration update
-      if (onRegistrationUpdate) {
-        onRegistrationUpdate()
+        // Notify parent component about registration update
+        if (onRegistrationUpdate) {
+          onRegistrationUpdate()
+        }
+      } else {
+        throw new Error('Failed to save registration data')
       }
 
     } catch (error) {
+      console.error('Registration error:', error)
       toast({
         title: "Registration Failed",
         description: "An error occurred during registration. Please try again.",

@@ -6,18 +6,22 @@ import SpeakerRegistrationTab from "@/components/speaker/SpeakerRegistrationTab"
 import ProposalSubmissionTab from "@/components/speaker/ProposalSubmissionTab"
 import SpeakerUpdatesTab from "@/components/speaker/SpeakerUpdatesTab"
 import { Toaster } from "@/components/ui/toaster"
-import { registeredSpeakers } from "@/lib/registered-speakers"
+import { findSpeakerByEmail } from "@/lib/registered-speakers"
 
 export default function SpeakerDashboard() {
   const [isRegistered, setIsRegistered] = useState(false)
   const [speakerName, setSpeakerName] = useState("")
   const [refreshKey, setRefreshKey] = useState(0)
 
+  // Get current user email (same logic as components)
+  const getCurrentUserEmail = () => {
+    return (typeof window !== 'undefined' && localStorage.getItem('currentUserEmail')) || 'speaker@example.com'
+  }
+
   // Check registration status
   const checkRegistrationStatus = () => {
-    // Mock user email - in real app this would come from session
-    const mockUserEmail = "speaker@example.com"
-    const speaker = registeredSpeakers.find(speaker => speaker.email === mockUserEmail)
+    const currentUserEmail = getCurrentUserEmail()
+    const speaker = findSpeakerByEmail(currentUserEmail)
     
     if (speaker) {
       setIsRegistered(true)

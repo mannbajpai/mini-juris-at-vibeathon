@@ -13,8 +13,8 @@ import { Textarea } from "@/components/ui/textarea"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { useToast } from "@/components/ui/use-toast"
-import { registeredSpeakers } from "@/lib/registered-speakers"
-import { proposals } from "@/lib/proposals"
+import { findSpeakerByEmail } from "@/lib/registered-speakers"
+import { getProposalsByEmail, addProposal, updateProposal, deleteProposal } from "@/lib/proposals"
 import { Trash2, Edit } from "lucide-react"
 
 const proposalSchema = z.object({
@@ -46,42 +46,48 @@ export default function ProposalSubmissionTab() {
     },
   })
 
-  // Check if user is registered on component mount
-  useEffect(() => {
-    // Mock user email - in real app this would come from session
-    const mockUserEmail = "speaker@example.com"
-    const speaker = registeredSpeakers.find(speaker => speaker.email === mockUserEmail)
+  // Get current user email (same logic as registration tab)
+  const getCurrentUserEmail = () => {
+    return localStorage.getItem('currentUserEmail') || 'speaker@example.com'
+  }
+
+  // Load speaker data and proposals
+  const loadSpeakerData = () => {
+    const currentUserEmail = getCurrentUserEmail()
+    const speaker = findSpeakerByEmail(currentUserEmail)
     
     if (speaker) {
       setIsRegistered(true)
       setSpeakerData(speaker)
       
       // Load speaker's proposals
-      const userProposals = proposals.filter(proposal => proposal.speakerEmail === mockUserEmail)
+      const userProposals = getProposalsByEmail(currentUserEmail)
       setSpeakerProposals(userProposals)
     } else {
       setIsRegistered(false)
+      setSpeakerData(null)
+      setSpeakerProposals([])
     }
+  }
+
+  // Check if user is registered on component mount
+  useEffect(() => {
+    loadSpeakerData()
   }, [])
 
   const onSubmit = async (data) => {
     try {
       const proposalData = {
-        id: editingProposal ? editingProposal.id : Date.now().toString(),
         ...data,
         coSpeakers: data.coSpeakers ? data.coSpeakers.split(",").map(s => s.trim()).filter(s => s) : [],
         speakerEmail: speakerData.email,
         speakerName: speakerData.fullName,
-        status: "Pending",
-        submissionDate: new Date().toISOString(),
       }
 
+      let result
       if (editingProposal) {
         // Update existing proposal
-        const index = proposals.findIndex(p => p.id === editingProposal.id)
-        if (index !== -1) {
-          proposals[index] = proposalData
-        }
+        result = updateProposal(editingProposal.id, proposalData)
         setEditingProposal(null)
         toast({
           title: "Proposal Updated",
@@ -89,21 +95,26 @@ export default function ProposalSubmissionTab() {
         })
       } else {
         // Add new proposal
-        proposals.push(proposalData)
+        result = addProposal(proposalData)
         toast({
           title: "Proposal Submitted",
           description: "Your proposal has been submitted successfully!",
         })
       }
 
-      // Update local state
-      const userProposals = proposals.filter(proposal => proposal.speakerEmail === speakerData.email)
-      setSpeakerProposals(userProposals)
+      if (result) {
+        // Reload proposals to get updated data
+        const userProposals = getProposalsByEmail(speakerData.email)
+        setSpeakerProposals(userProposals)
 
-      // Reset form
-      form.reset()
+        // Reset form
+        form.reset()
+      } else {
+        throw new Error('Failed to save proposal')
+      }
 
     } catch (error) {
+      console.error('Proposal submission error:', error)
       toast({
         title: "Submission Failed",
         description: "An error occurred while submitting your proposal. Please try again.",
@@ -122,10 +133,10 @@ export default function ProposalSubmissionTab() {
   }
 
   const handleDelete = (proposalId) => {
-    const index = proposals.findIndex(p => p.id === proposalId)
-    if (index !== -1) {
-      proposals.splice(index, 1)
-      const userProposals = proposals.filter(proposal => proposal.speakerEmail === speakerData.email)
+    const deletedProposal = deleteProposal(proposalId)
+    if (deletedProposal) {
+      // Reload proposals to get updated data
+      const userProposals = getProposalsByEmail(speakerData.email)
       setSpeakerProposals(userProposals)
       
       toast({
