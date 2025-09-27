@@ -46,6 +46,7 @@ Watch the demo video showcasing the StageSync App in action:
 - **Database:** MongoDB for structured and scalable data storage.
 - **AI Models:** Python-based AI services integrated with backend for proposal review, recommendation generation, and feedback analysis.
 - **Deployment:** Azure.
+- ![Workflow](./images/2.png)
 
 ## Scalability and Reliability
 
@@ -84,6 +85,7 @@ Watch the demo video showcasing the StageSync App in action:
 - AI-powered proposal review and post-event recommendation system.
 - Clean, intuitive UI/UX with role-specific dashboards.
 - Scalable design for real-world event deployment.
+
 
 
 
