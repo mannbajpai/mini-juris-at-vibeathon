@@ -55,10 +55,22 @@ The **Speaker Persona App** simplifies and automates the speaker and content lif
 5. **Event Day:** QR codes manage check-ins, resources, and attendance.
 6. **Post-Event:** Feedback collected → AI analyzes → insights generated → certificates issued.
 
+## Future Scope
+- **Integration with Virtual and Hybrid Event Platforms:** Enable seamless support for virtual/hybrid events with live streaming, virtual networking, and interactive sessions.
+- **Enhanced AI Capabilities:** Incorporate advanced machine learning models for deeper sentiment analysis, real-time session quality feedback, and personalized speaker coaching.
+- **Multi-language Support:** Expand accessibility with multilingual interfaces and translation services for global events.
+- **Mobile Application:** Develop dedicated mobile apps for on-the-go session management, notifications, and real-time interaction.
+- **Speaker and Attendee Analytics Dashboard:** Provide comprehensive analytics to event managers for better decision-making and targeted improvements.
+- **Blockchain for Certificates:** Use blockchain technology to secure and verify post-event certificate authenticity.
+- **Gamification Elements:** Introduce gamification to increase speaker and attendee engagement throughout the event lifecycle.
+- **Third-party Integrations:** Integrate with popular calendar, CRM, and marketing automation tools for enhanced workflow automation.
+- **AI-driven Networking:** Use AI to recommend networking opportunities and personalized agendas based on attendee preferences and behavior patterns.
+
 ## Deliverables
 - Functional web app prototype (frontend: Next.js, backend: Flask APIs).
 - AI-powered proposal review and post-event recommendation system.
 - Clean, intuitive UI/UX with role-specific dashboards.
 - Scalable design for real-world event deployment.
+
 
 
