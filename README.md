@@ -12,7 +12,8 @@ Watch the demo video showcasing the StageSync App in action:
 [Database](https://drive.google.com/file/d/1GhoKJSuewcAGlvhurh1lBJDVJDTJWkN-/view?usp=drive_link)
 
  ## POC
- [Link](https://docs.google.com/presentation/d/1NB6coRN2KTC7T7VmsJ1n6ma69tsP35pa/edit?usp=drive_link&ouid=108799394459587061231&rtpof=true&sd=true)
+ Access the presentation slides for an in-depth overview of the **StageSync**  App, its features, and technical details.  
+ [View Slides](https://docs.google.com/presentation/d/1NB6coRN2KTC7T7VmsJ1n6ma69tsP35pa/edit?usp=drive_link&ouid=108799394459587061231&rtpof=true&sd=true)
 
 
 ## Features
@@ -83,6 +84,7 @@ Watch the demo video showcasing the StageSync App in action:
 - AI-powered proposal review and post-event recommendation system.
 - Clean, intuitive UI/UX with role-specific dashboards.
 - Scalable design for real-world event deployment.
+
 
 
 
