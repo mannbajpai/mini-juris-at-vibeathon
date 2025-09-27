@@ -1,7 +1,7 @@
 # StageSync App
 
 ## Overview
-The **Speaker Persona App** simplifies and automates the speaker and content lifecycle for events such as SIT/Vibeathon. It enables **speakers** to manage session submissions, availability, and event-day activities seamlessly, while providing **event managers** a centralized platform to review, approve, and organize sessions, logistics, and communications. The app incorporates **AI-powered agents** to enhance efficiency by providing insights, feedback, and automation features that improve event planning and execution.
+The **StageSync** simplifies and automates the speaker and content lifecycle for events such as SIT/Vibeathon. It enables **speakers** to manage session submissions, availability, and event-day activities seamlessly, while providing **event managers** a centralized platform to review, approve, and organize sessions, logistics, and communications. The app incorporates **AI-powered agents** to enhance efficiency by providing insights, feedback, and automation features that improve event planning and execution.
 
 ## Features
 
@@ -71,6 +71,7 @@ The **Speaker Persona App** simplifies and automates the speaker and content lif
 - AI-powered proposal review and post-event recommendation system.
 - Clean, intuitive UI/UX with role-specific dashboards.
 - Scalable design for real-world event deployment.
+
 
 
 
