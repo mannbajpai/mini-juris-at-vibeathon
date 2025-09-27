@@ -48,7 +48,7 @@ Watch the demo video showcasing the StageSync App in action:
 - **Deployment:** Azure.
 - ![Workflow](./images/2.png)
 ## User Flow
-(./images/3.png)
+![Workflow](./images/3.png)
 
 ## Scalability and Reliability
 
@@ -87,6 +87,7 @@ Watch the demo video showcasing the StageSync App in action:
 - AI-powered proposal review and post-event recommendation system.
 - Clean, intuitive UI/UX with role-specific dashboards.
 - Scalable design for real-world event deployment.
+
 
 
 
