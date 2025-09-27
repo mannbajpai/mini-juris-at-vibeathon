@@ -30,7 +30,7 @@ The **Speaker Persona App** simplifies and automates the speaker and content lif
 ## Tech Stack
 - **Frontend:** [Next.js](https://nextjs.org/) – responsive, modern UI with shadcn integration.
 - **Backend/APIs:** [Flask](https://flask.palletsprojects.com/) – lightweight, scalable REST APIs managing speaker and event data.
-- **Database:** Flexible choice (PostgreSQL/MySQL/Firebase) for structured data storage.
+- **Database:** MongoDB for structured and scalable data storage.
 - **AI Models:** Python-based AI services integrated with backend for proposal review, recommendation generation, and feedback analysis.
 - **Deployment:** Azure.
 
@@ -71,6 +71,7 @@ The **Speaker Persona App** simplifies and automates the speaker and content lif
 - AI-powered proposal review and post-event recommendation system.
 - Clean, intuitive UI/UX with role-specific dashboards.
 - Scalable design for real-world event deployment.
+
 
 
 
