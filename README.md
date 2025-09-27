@@ -3,6 +3,18 @@
 ## Overview
 The **StageSync** simplifies and automates the speaker and content lifecycle for events such as SIT/Vibeathon. It enables **speakers** to manage session submissions, availability, and event-day activities seamlessly, while providing **event managers** a centralized platform to review, approve, and organize sessions, logistics, and communications. The app incorporates **AI-powered agents** to enhance efficiency by providing insights, feedback, and automation features that improve event planning and execution.
 
+## Demo Link
+
+Watch the demo video showcasing the StageSync App in action:
+
+[Frontend](https://drive.google.com/file/d/1DHmF_lAvyGjLSQ7y0GuEAFqUJhyfXUIo/view?usp=drive_link)
+[Backend](https://drive.google.com/file/d/1Fk8KbbtIBwhucbbJOf3QM82HInpn2sdg/view?usp=drive_link)
+[Database](https://drive.google.com/file/d/1GhoKJSuewcAGlvhurh1lBJDVJDTJWkN-/view?usp=drive_link)
+
+ ## POC
+ [Link](https://docs.google.com/presentation/d/1NB6coRN2KTC7T7VmsJ1n6ma69tsP35pa/edit?usp=drive_link&ouid=108799394459587061231&rtpof=true&sd=true)
+
+
 ## Features
 
 ### Speaker Features
@@ -71,6 +83,7 @@ The **StageSync** simplifies and automates the speaker and content lifecycle for
 - AI-powered proposal review and post-event recommendation system.
 - Clean, intuitive UI/UX with role-specific dashboards.
 - Scalable design for real-world event deployment.
+
 
 
 
